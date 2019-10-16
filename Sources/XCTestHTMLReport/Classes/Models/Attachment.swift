@@ -70,7 +70,7 @@ struct Attachment: HTML
         self.name = attachment.name.map(AttachmentName.init(rawValue:))
         if let id = attachment.payloadRef?.id,
             let url = file.exportPayload(id: id) {
-            self.path = url.relativePath
+            self.path = url.lastPathComponent
         } else {
             self.path = ""
         }
