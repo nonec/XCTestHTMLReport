@@ -14,6 +14,7 @@ enum AttachmentType: String {
     case data = "public.data"
     case html = "public.html"
     case jpeg = "public.jpeg"
+    case heic = "public.heic"
     case png = "public.png"
     case mp4 = "public.mpeg-4"
     case text = "public.plain-text"
@@ -48,6 +49,8 @@ enum AttachmentType: String {
             return "application/octet-stream"
         case .unknown:
             return nil
+        case .heic:
+            return "image/heic"
         }
     }
 }
@@ -104,7 +107,7 @@ struct Attachment: HTML
 
     var fallbackDisplayName: String {
         switch type {
-        case .png, .jpeg:
+        case .png, .jpeg, .heic:
             return "Screenshot"
         case .mp4:
             return "Video"
@@ -151,7 +154,7 @@ struct Attachment: HTML
 
     var htmlTemplate: String {
         switch type {
-        case .png, .jpeg:
+        case .png, .jpeg, .heic:
             return HTMLTemplates.screenshot
         case .mp4:
             return HTMLTemplates.video
